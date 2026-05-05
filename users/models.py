@@ -15,4 +15,5 @@ class User(AbstractUser):
         choices=MembershipChoices.choices,
         null=True,
         blank=True,
+        help_text="User membership type (basic or premium)",
     )
