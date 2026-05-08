@@ -17,3 +17,6 @@ class User(AbstractUser):
         blank=True,
         help_text="User membership type (basic or premium)",
     )
+
+    def __str__(self):
+        return self.username
