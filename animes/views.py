@@ -9,3 +9,10 @@ class Animes(APIView):
         animes = Anime.objects.all()
         serializer = AnimeSerializer(animes, many=True)
         return Response(serializer.data)
+
+
+class AnimeDetail(APIView):
+    def get(self, request, anime_pk):
+        anime = Anime.objects.get(pk=anime_pk)
+        serializer = AnimeSerializer(anime)
+        return Response(serializer.data)
