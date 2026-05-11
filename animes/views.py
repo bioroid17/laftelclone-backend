@@ -5,7 +5,7 @@ from rest_framework.response import Response
 
 
 class Animes(APIView):
-    def get(self, request, user_pk):
+    def get(self, request):
         animes = Anime.objects.all()
         serializer = AnimeSerializer(animes, many=True)
         return Response(serializer.data)
