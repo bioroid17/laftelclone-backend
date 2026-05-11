@@ -1,3 +1,12 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Anime
+
+
+@admin.register(Anime)
+class AnimeAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "title",
+        "release_date",
+    )
