@@ -9,16 +9,15 @@ class AnimeAdmin(admin.ModelAdmin):
     list_display = (
         "title",
         "release_date",
+        "genres",
+        "tags",
+        "type",
+        "age_rating",
+        "is_complete",
     )
 
 
 @admin.register(Series)
 class SeriesAdmin(admin.ModelAdmin):
 
-    list_display = (
-        "title",
-        "genre",
-        "type",
-        "age_rating",
-        "is_complete",
-    )
+    list_display = ("title",)

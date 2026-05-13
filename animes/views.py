@@ -1,5 +1,5 @@
 from .models import Anime
-from .serializers import AnimeSerializer
+from .serializers import AnimeSerializer, SeriesSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -15,4 +15,12 @@ class AnimeDetail(APIView):
     def get(self, request, anime_pk):
         anime = Anime.objects.get(pk=anime_pk)
         serializer = AnimeSerializer(anime)
+        return Response(serializer.data)
+
+
+class AnimeSeries(APIView):
+    def get(self, request, anime_pk):
+        anime = Anime.objects.get(pk=anime_pk)
+        series = anime.series
+        serializer = SeriesSerializer(series)
         return Response(serializer.data)

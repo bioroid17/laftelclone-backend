@@ -8,6 +8,14 @@ class Series(CommonModel):
     class Meta:
         verbose_name_plural = "Series"
 
+    title = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.title
+
+
+class Anime(CommonModel):
+
     class AgeRatingChoices(models.IntegerChoices):
         ALL = (0, "ALL")
         R7 = (7, "7세")
@@ -21,25 +29,6 @@ class Series(CommonModel):
         OVA = ("ova", "OVA")
         ETC = ("etc", "기타")
 
-    title = models.CharField(max_length=255)
-    description = models.TextField()
-    genre = models.CharField(max_length=100)
-    type = models.CharField(
-        max_length=15,
-        choices=TypeChoices.choices,
-        default=TypeChoices.TVA,
-    )
-    age_rating = models.PositiveSmallIntegerField(
-        choices=AgeRatingChoices.choices,
-        default=AgeRatingChoices.ALL,
-    )
-    is_complete = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.title
-
-
-class Anime(CommonModel):
     series = models.ForeignKey(
         to=Series,
         on_delete=models.SET_NULL,
@@ -50,6 +39,30 @@ class Anime(CommonModel):
     title = models.CharField(max_length=255)
     description = models.TextField()
     release_date = models.DateField()
+    genres = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True,
+        help_text="Comma-separated genres (e.g., SF, 모험, 개그)",
+    )
+    tags = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True,
+        help_text="Comma-separated tags (e.g., 가족, 로봇, 게임)",
+    )
+    type = models.CharField(
+        max_length=15,
+        choices=TypeChoices.choices,
+        default=TypeChoices.TVA,
+    )
+    age_rating = models.PositiveSmallIntegerField(
+        choices=AgeRatingChoices.choices,
+        default=AgeRatingChoices.ALL,
+    )
+    is_available = models.BooleanField(default=True)
+    is_complete = models.BooleanField(default=False)
+    is_only_on_laftel = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
