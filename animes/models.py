@@ -78,8 +78,10 @@ class Episode(CommonModel):
     title = models.CharField(max_length=255)
     episode_number = models.PositiveIntegerField()
     release_date = models.DateField()
+    """
+    DurationField는 내부적으로 시간 간격을 초 단위로 저장하지만, 입력과 출력 시에는 "HH:MM:SS" 형식으로 처리됩니다. 이를 통해 에피소드의 재생 시간을 직관적으로 관리할 수 있습니다. Python에서는 datetime.timedelta 객체로 DurationField 값을 다룰 수 있습니다.
+    """
     duration = models.DurationField(default="00:00:00")
 
     def __str__(self):
-        print(self.duration)
         return f"{self.anime.title} - {self.episode_number}화: {self.title}"
