@@ -66,3 +66,20 @@ class Anime(CommonModel):
 
     def __str__(self):
         return self.title
+
+
+class Episode(CommonModel):
+
+    anime = models.ForeignKey(
+        to=Anime,
+        on_delete=models.CASCADE,
+        related_name="episodes",
+    )
+    title = models.CharField(max_length=255)
+    episode_number = models.PositiveIntegerField()
+    release_date = models.DateField()
+    duration = models.DurationField(default="00:00:00")
+
+    def __str__(self):
+        print(self.duration)
+        return f"{self.anime.title} - {self.episode_number}화: {self.title}"

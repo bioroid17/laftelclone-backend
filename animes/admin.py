@@ -1,12 +1,19 @@
 from django.contrib import admin
 
-from .models import Anime, Series
+from .models import Anime, Episode, Series
+
+
+@admin.register(Series)
+class SeriesAdmin(admin.ModelAdmin):
+
+    list_display = ("title",)
 
 
 @admin.register(Anime)
 class AnimeAdmin(admin.ModelAdmin):
 
     list_display = (
+        "series",
         "title",
         "release_date",
         "genres",
@@ -17,7 +24,7 @@ class AnimeAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(Series)
-class SeriesAdmin(admin.ModelAdmin):
+@admin.register(Episode)
+class EpisodeAdmin(admin.ModelAdmin):
 
-    list_display = ("title",)
+    list_display = ("anime", "title", "episode_number", "release_date", "duration")
