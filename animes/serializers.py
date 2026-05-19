@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Anime, Series
+from .models import Anime, Episode, Series
 
 
 class SeriesSerializer(ModelSerializer):
@@ -14,4 +14,13 @@ class AnimeSerializer(ModelSerializer):
 
     class Meta:
         model = Anime
+        fields = "__all__"
+
+
+class EpisodeSerializer(ModelSerializer):
+
+    anime = AnimeSerializer()
+
+    class Meta:
+        model = Episode
         fields = "__all__"
